@@ -492,12 +492,12 @@ function M.update_state()
   for _, plugin in pairs(Config.plugins) do
     plugin._ = plugin._ or {}
     if plugin.lazy == nil then
-      local lazy = plugin._.dep
-        or Config.options.defaults.lazy
+      local lazy = Config.options.defaults.lazy
+        and (plugin._.dep
         or plugin.event
         or plugin.keys
         or plugin.ft
-        or plugin.cmd
+        or plugin.cmd)
       plugin.lazy = lazy and true or false
     end
     if plugin.dir:find(Config.options.root, 1, true) == 1 then
